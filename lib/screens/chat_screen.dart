@@ -22,6 +22,7 @@ class ChatScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: const Color(0xFFFB6334),
         onPressed: () async {
           await FirebaseFirestore.instance
               .collection('chats/Up120tnS7gHBeSxcDL3t/messages')
