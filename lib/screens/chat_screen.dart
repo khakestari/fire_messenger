@@ -27,6 +27,10 @@ class ChatScreen extends StatelessWidget {
           return ListView.builder(
             itemCount: documents.length,
             itemBuilder: (context, index) => Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.white12),
+                borderRadius: const BorderRadius.all(Radius.circular(5)),
+              ),
               padding: const EdgeInsets.all(8),
               child: Text(documents[index]['text']),
             ),
@@ -35,13 +39,10 @@ class ChatScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0xFFFB6334),
-        onPressed: () async {
-          //     .listen((event) {
-          //   for (var document in event.docs) {
-          //     print(document['text']);
-          //   }
-          // }
-          // );
+        onPressed: () {
+          FirebaseFirestore.instance
+              .collection('chats/Up120tnS7gHBeSxcDL3t/messages')
+              .add({'text': 'This was added by clicking the button'});
         },
         child: const Icon(Icons.add),
       ),
