@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart' as f;
+import 'package:firebase_auth/firebase_auth.dart';
 import './firebase_options.dart';
 // import './screens/chat_screen.dart';
 import 'screens/auth_screen.dart';
 
-void main() async {
+late final f.FirebaseApp app;
+late final FirebaseAuth auth;
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await f.Firebase.initializeApp(
+  app = await f.Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform);
+  auth = FirebaseAuth.instanceFor(app: app);
   runApp(const MyApp());
 }
 

@@ -1,17 +1,17 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../models/http_exception.dart';
-import '../providers/auth.dart';
 
 // ignore: constant_identifier_names
 enum AuthMode { Signup, Login }
 
 class AuthCard extends StatefulWidget {
-  const AuthCard({super.key});
-
+  final void Function(
+    String email,
+    String password,
+    String username,
+    AuthMode mode,
+  ) submitFn;
+  AuthCard(this.submitFn);
   @override
   State<AuthCard> createState() => _AuthCardState();
 }
@@ -64,21 +64,21 @@ class _AuthCardState extends State<AuthCard>
     _controller.dispose();
   }
 
-  void _showErrorDialog(String message) {
-    showDialog(
-        context: context,
-        builder: (ctx) => AlertDialog(
-              title: const Text('An error occurred! '),
-              content: Text(message),
-              actions: [
-                TextButton(
-                    onPressed: () {
-                      Navigator.of(ctx).pop();
-                    },
-                    child: const Text('Okay'))
-              ],
-            ));
-  }
+  // void _showErrorDialog(String message) {
+  //   showDialog(
+  //       context: context,
+  //       builder: (ctx) => AlertDialog(
+  //             title: const Text('An error occurred! '),
+  //             content: Text(message),
+  //             actions: [
+  //               TextButton(
+  //                   onPressed: () {
+  //                     Navigator.of(ctx).pop();
+  //                   },
+  //                   child: const Text('Okay'))
+  //             ],
+  //           ));
+  // }
 
   Future<void> _submit() async {
     FocusScope.of(context).unfocus();
@@ -87,6 +87,12 @@ class _AuthCardState extends State<AuthCard>
       return;
     }
     _formKey.currentState!.save();
+    widget.submitFn(
+      _authData['email']!.trim(),
+      _authData['password']!.trim(),
+      _authData['username']!.trim(),
+      _authMode,
+    );
     setState(() {
       _isLoading = true;
     });
