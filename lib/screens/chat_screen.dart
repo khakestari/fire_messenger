@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart' as F;
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatScreen extends StatelessWidget {
@@ -14,25 +13,35 @@ class ChatScreen extends StatelessWidget {
           'FireMessenger',
         ),
       ),
-      body: ListView.builder(
-        itemCount: 12,
-        itemBuilder: (context, index) => Container(
-          padding: const EdgeInsets.all(8),
-          child: const Text('this works!'),
-        ),
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('chats/Up120tnS7gHBeSxcDL3t/messages')
+            .snapshots(),
+        builder: (context, streamSnapshot) {
+          if (streamSnapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          final documents = streamSnapshot.data!.docs;
+          return ListView.builder(
+            itemCount: documents.length,
+            itemBuilder: (context, index) => Container(
+              padding: const EdgeInsets.all(8),
+              child: Text(documents[index]['text']),
+            ),
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0xFFFB6334),
         onPressed: () async {
-          await FirebaseFirestore.instance
-              .collection('chats/Up120tnS7gHBeSxcDL3t/messages')
-              .snapshots()
-              .listen((event) {
-            event.docs.forEach((document) {
-              print(document['text']);
-            });
-          });
-          // print(temp);
+          //     .listen((event) {
+          //   for (var document in event.docs) {
+          //     print(document['text']);
+          //   }
+          // }
+          // );
         },
         child: const Icon(Icons.add),
       ),
