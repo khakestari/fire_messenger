@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>16916994820-0mbkuf1ctbo53485ho1vh26p6dn1e4gp.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.16916994820-0mbkuf1ctbo53485ho1vh26p6dn1e4gp</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBJ7XnsBgR1HW1KXejSraQQbzSlUsUvEaA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>16916994820</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.fireMessenger.RunnerTests</string>
+	<key>PROJECT_ID</key>
+	<string>fire-messenger-b02a1</string>
+	<key>STORAGE_BUCKET</key>
+	<string>fire-messenger-b02a1.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:16916994820:ios:925f4337af97256ae60e51</string>
+</dict>
+</plist>

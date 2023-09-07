@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "16916994820",
+    "project_id": "fire-messenger-b02a1",
+    "storage_bucket": "fire-messenger-b02a1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:16916994820:android:74409187039737abe60e51",
+        "android_client_info": {
+          "package_name": "com.example.fire_messenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "16916994820-g5j35ojaupgcfeosi501hupi43502rje.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASnrZDqK8ge7Tciu0KTRYKpBdUJMMddOU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "16916994820-g5j35ojaupgcfeosi501hupi43502rje.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
