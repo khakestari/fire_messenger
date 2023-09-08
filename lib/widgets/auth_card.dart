@@ -11,7 +11,8 @@ class AuthCard extends StatefulWidget {
     String username,
     AuthMode mode,
   ) submitFn;
-  AuthCard(this.submitFn);
+  final _isLoading;
+  AuthCard(this.submitFn, this._isLoading);
   @override
   State<AuthCard> createState() => _AuthCardState();
 }
@@ -27,7 +28,6 @@ class _AuthCardState extends State<AuthCard>
     'password': '',
   };
 
-  var _isLoading = false;
   final _passwordController = TextEditingController();
 
   late AnimationController _controller;
@@ -93,9 +93,9 @@ class _AuthCardState extends State<AuthCard>
       _authData['username']!.trim(),
       _authMode,
     );
-    setState(() {
-      _isLoading = true;
-    });
+    // setState(() {
+    //   _isLoading = true;
+    // });
 
     // try {
     //   if (_authMode == AuthMode.Login) {
@@ -290,8 +290,8 @@ class _AuthCardState extends State<AuthCard>
                     ),
                   ),
                   const SizedBox(height: 20),
-                  if (_isLoading)
-                    const CircularProgressIndicator()
+                  if (widget._isLoading)
+                    const CircularProgressIndicator.adaptive()
                   else
                     TextButton(
                       onPressed: _submit,

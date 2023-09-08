@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -21,26 +20,49 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
+  bool _isLoading = false;
   void _submitAuthForm(
       String email, String password, String username, AuthMode mode) async {
+    // print('$email $password $username');
     UserCredential authResult;
     try {
+      setState(() {
+        _isLoading = true;
+      });
       if (mode == AuthMode.Login) {
         authResult = await auth.signInWithEmailAndPassword(
             email: email, password: password);
       } else if (mode == AuthMode.Signup) {
+        print('سلام');
         authResult = await auth.createUserWithEmailAndPassword(
-            email: email, password: password);
+          email: email,
+          password: password,
+        );
+        await FirebaseFirestore.instanceFor(app: app)
+            .collection('users')
+            .doc(authResult.user!.uid)
+            .set({
+          'username': username,
+          'email': email,
+        });
       }
     } on PlatformException catch (e) {
+      print('اوضا گندلت؟');
       var message = 'An error occurred, please check your credentials!';
       if (e.message != null) {
         message = e.message.toString();
       }
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(message)));
+      setState(() {
+        _isLoading = false;
+      });
     } catch (e) {
+      print('دیه خیلی ریدی');
       print(e);
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -109,7 +131,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   ),
                   Flexible(
                     flex: deviceSize.width > 600 ? 2 : 1,
-                    child: AuthCard(_submitAuthForm),
+                    child: AuthCard(_submitAuthForm, _isLoading),
                   ),
                 ],
               ),
