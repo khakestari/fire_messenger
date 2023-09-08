@@ -2,7 +2,7 @@ import '../widgets/chat/messages.dart';
 import '../widgets/chat/new_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../main.dart';
 
@@ -14,6 +14,7 @@ class ChatScreen extends StatelessWidget {
     // CollectionReference chats = FirebaseFirestore.instance.collection('chats');
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.tertiary,
         title: const Text(
           'FireMessenger',
         ),

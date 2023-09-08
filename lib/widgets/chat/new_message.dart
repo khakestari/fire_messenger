@@ -25,27 +25,45 @@ class _NewMessageState extends State<NewMessage> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Theme.of(context).colorScheme.tertiary,
       margin: const EdgeInsets.only(top: 8),
       padding: const EdgeInsets.all(8),
-      child: Row(children: [
-        Expanded(
-          child: TextField(
-            controller: _controller,
-            decoration: const InputDecoration(labelText: 'Write a message...'),
-            onChanged: (value) {
-              setState(() {
-                _enteredMessage = value;
-              });
-            },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          IconButton(
+              onPressed: _enteredMessage.trim().isEmpty ? null : null,
+              icon: Icon(
+                Icons.attachment_sharp,
+                color: Theme.of(context).colorScheme.primary,
+              )),
+          Expanded(
+            child: TextField(
+              controller: _controller,
+              decoration: const InputDecoration(
+                  hintText: 'Write a message...', border: InputBorder.none),
+              onChanged: (value) {
+                setState(() {
+                  _enteredMessage = value;
+                });
+              },
+            ),
           ),
-        ),
-        IconButton(
+          IconButton(
+              onPressed: _enteredMessage.trim().isEmpty ? null : null,
+              icon: Icon(
+                Icons.emoji_emotions_outlined,
+                color: Theme.of(context).colorScheme.primary,
+              )),
+          IconButton(
             onPressed: _enteredMessage.trim().isEmpty ? null : _sendMessage,
             icon: Icon(
               Icons.send,
               color: Theme.of(context).colorScheme.primary,
-            ))
-      ]),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

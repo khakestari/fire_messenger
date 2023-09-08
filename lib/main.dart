@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
           primary: const Color(0xFFFB6334),
           secondary: const Color(0xFF1A73E8),
+          tertiary: const Color(0xFF03527E),
           seedColor: Colors.white,
         ),
         textButtonTheme: TextButtonThemeData(
