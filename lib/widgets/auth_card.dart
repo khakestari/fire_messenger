@@ -80,9 +80,12 @@ class _AuthCardState extends State<AuthCard>
   //           ));
   // }
 
-  Future<void> _submit() async {
+  void _submit() {
     FocusScope.of(context).unfocus();
+    // print(_formKey.currentState);
+    // print(_formKey.currentState!.validate());
     if (!_formKey.currentState!.validate()) {
+      // print('here is reading');
       // Invalid!
       return;
     }
@@ -220,11 +223,14 @@ class _AuthCardState extends State<AuthCard>
                             fillColor: Color(0x00C6B8B8),
                             suffixIcon: Icon(Icons.account_circle),
                           ),
-                          validator: (value) {
-                            if (value!.isEmpty || value.length < 4) {
-                              return 'Please enter at least 4 characters.';
-                            }
-                          },
+                          validator: _authMode == AuthMode.Signup
+                              ? (value) {
+                                  if (value!.isEmpty || value.length < 4) {
+                                    return 'Please enter at least 4 characters.';
+                                  }
+                                  return null;
+                                }
+                              : null,
                           onSaved: (value) {
                             _authData['username'] = value!;
                           },

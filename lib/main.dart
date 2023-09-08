@@ -1,3 +1,4 @@
+import 'package:fire_messenger/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart' as f;
@@ -44,7 +45,15 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: AuthScreen(),
+      home: StreamBuilder(
+        stream: FirebaseAuth.instanceFor(app: app).authStateChanges(),
+        builder: (ctx, userSnapshot) {
+          if (userSnapshot.hasData) {
+            return ChatScreen();
+          }
+          return AuthScreen();
+        },
+      ),
     );
   }
 }

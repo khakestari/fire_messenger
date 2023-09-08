@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -23,17 +23,19 @@ class _AuthScreenState extends State<AuthScreen> {
   bool _isLoading = false;
   void _submitAuthForm(
       String email, String password, String username, AuthMode mode) async {
-    // print('$email $password $username');
+    // print('$email $password');
+
     UserCredential authResult;
     try {
       setState(() {
         _isLoading = true;
       });
+      // print('waz up');
       if (mode == AuthMode.Login) {
+        // print('سلام');
         authResult = await auth.signInWithEmailAndPassword(
             email: email, password: password);
       } else if (mode == AuthMode.Signup) {
-        print('سلام');
         authResult = await auth.createUserWithEmailAndPassword(
           email: email,
           password: password,
