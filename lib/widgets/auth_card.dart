@@ -64,22 +64,6 @@ class _AuthCardState extends State<AuthCard>
     _controller.dispose();
   }
 
-  // void _showErrorDialog(String message) {
-  //   showDialog(
-  //       context: context,
-  //       builder: (ctx) => AlertDialog(
-  //             title: const Text('An error occurred! '),
-  //             content: Text(message),
-  //             actions: [
-  //               TextButton(
-  //                   onPressed: () {
-  //                     Navigator.of(ctx).pop();
-  //                   },
-  //                   child: const Text('Okay'))
-  //             ],
-  //           ));
-  // }
-
   void _submit() {
     FocusScope.of(context).unfocus();
     // print(_formKey.currentState);
@@ -300,6 +284,9 @@ class _AuthCardState extends State<AuthCard>
                     const CircularProgressIndicator.adaptive()
                   else
                     TextButton(
+                      style: TextButton.styleFrom(
+                          backgroundColor:
+                              const Color(0xfFfb6334).withOpacity(0.75)),
                       onPressed: _submit,
                       child: Text(
                         _authMode == AuthMode.Login ? 'Log in' : 'Sign up ',

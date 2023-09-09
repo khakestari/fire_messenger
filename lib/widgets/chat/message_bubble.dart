@@ -3,11 +3,16 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class MessageBubble extends StatelessWidget {
-  MessageBubble(this.message);
+  MessageBubble(this.message, this.isMe, {required this.key});
   final String message;
+  final bool isMe;
+  final Key key;
+
   @override
   Widget build(BuildContext context) {
+    print(isMe);
     return Row(
+      mainAxisAlignment: isMe ? MainAxisAlignment.start : MainAxisAlignment.end,
       children: [
         ClipRRect(
           borderRadius: const BorderRadius.all(Radius.circular(30)),
@@ -17,14 +22,23 @@ class MessageBubble extends StatelessWidget {
               width: 300,
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
               margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(30),
-                  bottomRight: Radius.circular(30),
-                ),
-                color: const Color(0xFF00449B).withOpacity(0.5),
-              ),
+              decoration: isMe
+                  ? BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
+                        bottomRight: Radius.circular(30),
+                      ),
+                      color: const Color(0xFF00449B).withOpacity(0.5),
+                    )
+                  : BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
+                        bottomLeft: Radius.circular(30),
+                      ),
+                      color: const Color(0xFFD70240).withOpacity(0.5),
+                    ),
               child: Text(
                 message,
                 style: const TextStyle(color: Colors.white),

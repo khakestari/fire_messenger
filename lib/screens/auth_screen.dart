@@ -20,6 +20,21 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
+  // void _showErrorDialog(String message) {
+  //   showDialog(
+  //       context: context,
+  //       builder: (ctx) => AlertDialog(
+  //             title: const Text('An error occurred! '),
+  //             content: Text(message),
+  //             actions: [
+  //               TextButton(
+  //                   onPressed: () {
+  //                     Navigator.of(ctx).pop();
+  //                   },
+  //                   child: const Text('Okay'))
+  //             ],
+  //           ));
+  // }
   bool _isLoading = false;
   void _submitAuthForm(
       String email, String password, String username, AuthMode mode) async {
@@ -49,19 +64,19 @@ class _AuthScreenState extends State<AuthScreen> {
         });
       }
     } on PlatformException catch (e) {
-      print('اوضا گندلت؟');
       var message = 'An error occurred, please check your credentials!';
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.toString())));
       if (e.message != null) {
         message = e.message.toString();
       }
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(message)));
       setState(() {
         _isLoading = false;
       });
+      // _showErrorDialog()
     } catch (e) {
-      print('دیه خیلی ریدی');
-      print(e);
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(backgroundColor: Colors.red, content: Text(e.toString())));
       setState(() {
         _isLoading = false;
       });
