@@ -28,11 +28,12 @@ class Messages extends StatelessWidget {
             final chatDocs = chatSnapshot.data!.docs;
             print(futureSnapshot.data);
             print('mewo');
-            print(chatDocs[1]['userId']);
+            // print(chatDocs[1]['userId']);
             return ListView.builder(
               reverse: true,
               itemCount: chatDocs.length,
               itemBuilder: (ctx, index) => MessageBubble(
+                chatDocs[index]['username'],
                 chatDocs[index]['text'],
                 chatDocs[index]['userId'] == futureSnapshot.data,
                 key: ValueKey(chatDocs[index].id),
