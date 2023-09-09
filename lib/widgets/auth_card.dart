@@ -1,4 +1,5 @@
 import 'dart:ui';
+import '../widgets/pickers/user_image_picker.dart';
 import 'package:flutter/material.dart';
 
 // ignore: constant_identifier_names
@@ -80,46 +81,6 @@ class _AuthCardState extends State<AuthCard>
       _authData['username']!.trim(),
       _authMode,
     );
-    // setState(() {
-    //   _isLoading = true;
-    // });
-
-    // try {
-    //   if (_authMode == AuthMode.Login) {
-    //     // Log user in
-    //     await Provider.of<Auth>(context, listen: false)
-    //         .login(_authData['email']!, _authData['password']!);
-    //     // print('login done');
-    //   } else {
-    //     // Sign user up
-    //     await Provider.of<Auth>(context, listen: false)
-    //         .signup(_authData['email']!, _authData['password']!);
-    //   }
-    //   Navigator.of(context).pushReplacementNamed('/transactions');
-    // } on HttpException catch (error) {
-    //   var errorMessage = 'Authentication failed';
-    //   if (error.toString().contains('EMAIL_EXISTS')) {
-    //     errorMessage = 'This email address is already in use.';
-    //   } else if (error.toString().contains('INVALID_EMAIL')) {
-    //     errorMessage = 'This is not a valid email address.';
-    //   } else if (error.toString().contains('WEAK_PASSWORD')) {
-    //     errorMessage = 'This password is too weak.';
-    //   } else if (error.toString().contains('EMAIL_NOT_FOUND')) {
-    //     errorMessage = 'Could not find a user with that email.';
-    //   } else if (error.toString().contains('INVALID_PASSWORD')) {
-    //     errorMessage = 'Invalid password.';
-    //   }
-    //   _showErrorDialog(errorMessage);
-    // } catch (error) {
-    //   print(error);
-    //   const errorMessage =
-    //       'Could not authenticate you. Please try again later.';
-    //   _showErrorDialog(errorMessage);
-    // }
-
-    // setState(() {
-    //   _isLoading = false;
-    // });
   }
 
   void _switchAuthMode() {
@@ -162,7 +123,20 @@ class _AuthCardState extends State<AuthCard>
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  const SizedBox(height: 5),
+                  const SizedBox(height: 10),
+                  AnimatedContainer(
+                    constraints: BoxConstraints(
+                        minHeight: _authMode == AuthMode.Signup ? 60 : 0,
+                        maxHeight: _authMode == AuthMode.Signup ? 120 : 0),
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeIn,
+                    child: FadeTransition(
+                      opacity: _opacityAnimation!,
+                      child: SlideTransition(
+                          position: _slideAnimation!, child: UserImagePicker()),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
                   TextFormField(
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(

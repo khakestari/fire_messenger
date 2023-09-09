@@ -1,9 +1,8 @@
 import 'dart:ui';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import '../../main.dart';
+// import '../../../main.dart';
 
 class MessageBubble extends StatelessWidget {
   MessageBubble(this.username, this.message, this.isMe, {required this.key});
@@ -33,7 +32,8 @@ class MessageBubble extends StatelessWidget {
                         topRight: Radius.circular(30),
                         bottomLeft: Radius.circular(30),
                       ),
-                      color: const Color(0xFF00449B).withOpacity(0.5),
+                      color:
+                          const Color(0xFFcccccc).withOpacity(0.5), //FF00449B
                     )
                   : BoxDecoration(
                       borderRadius: const BorderRadius.only(
