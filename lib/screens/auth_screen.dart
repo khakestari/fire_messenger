@@ -42,11 +42,9 @@ class _AuthScreenState extends State<AuthScreen> {
     String email,
     String password,
     String username,
-    File profileImage,
+    File? profileImage,
     AuthMode mode,
   ) async {
-    // print('$email $password');
-
     UserCredential authResult;
     String profileImageUrl;
     try {
@@ -63,12 +61,13 @@ class _AuthScreenState extends State<AuthScreen> {
           email: email,
           password: password,
         );
-        print(authResult.user!.uid);
+        // print(authResult.user!.uid);
         Reference ref = FirebaseStorage.instance
             .ref()
             .child('profile_images')
             .child('${authResult.user!.uid}.jpg');
-        ref.putFile(profileImage).then((_) async {
+
+        ref.putFile(profileImage!).whenComplete(() async {
           profileImageUrl = await ref.getDownloadURL();
           print(profileImageUrl);
           print('belya');
@@ -85,7 +84,7 @@ class _AuthScreenState extends State<AuthScreen> {
     } on PlatformException catch (e) {
       var message = 'An error occurred, please check your credentials!';
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(e.toString())));
+          .showSnackBar(SnackBar(content: Text(message)));
       if (e.message != null) {
         message = e.message.toString();
       }

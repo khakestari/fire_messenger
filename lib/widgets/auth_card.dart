@@ -11,7 +11,7 @@ class AuthCard extends StatefulWidget {
     String email,
     String password,
     String username,
-    File profileImage,
+    File? profileImage,
     AuthMode mode,
   ) submitFn;
   final _isLoading;
@@ -69,36 +69,6 @@ class _AuthCardState extends State<AuthCard>
     _controller.dispose();
   }
 
-  void _submit() {
-    FocusScope.of(context).unfocus();
-    if (_userImageFile == null && _authMode == AuthMode.Signup) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('You didn\'t pick an image!'),
-          backgroundColor: Colors.red,
-        ),
-      );
-      return;
-    }
-    if (!_formKey.currentState!.validate()) {
-      // print('here is reading');
-      // Invalid!
-      return;
-    }
-    _formKey.currentState!.save();
-    widget.submitFn(
-      _authData['email']!.trim(),
-      _authData['password']!.trim(),
-      _authData['username']!.trim(),
-      _userImageFile!,
-      _authMode,
-    );
-  }
-
-  void _submitImage(File? image) {
-    _userImageFile = image;
-  }
-
   void _switchAuthMode() {
     if (_authMode == AuthMode.Login) {
       setState(() {
@@ -111,6 +81,34 @@ class _AuthCardState extends State<AuthCard>
       });
       _controller.reverse();
     }
+  }
+
+  void _submitImage(File? image) {
+    _userImageFile = image;
+  }
+
+  void _submit() {
+    FocusScope.of(context).unfocus();
+    if (_userImageFile == null && _authMode == AuthMode.Signup) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('You didn\'t pick an image!'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+    _formKey.currentState!.save();
+    widget.submitFn(
+      _authData['email']!.trim(),
+      _authData['password']!.trim(),
+      _authData['username']!.trim(),
+      _userImageFile,
+      _authMode,
+    );
   }
 
   @override
@@ -294,7 +292,9 @@ class _AuthCardState extends State<AuthCard>
                       // textStyle: TextStyle(),
                     ),
                     child: Text(
-                      '${_authMode == AuthMode.Login ? 'Don\'t have an account? Sign up' : 'Have an account already? Log in'}',
+                      _authMode == AuthMode.Login
+                          ? 'Don\'t have an account? Sign up'
+                          : 'Have an account already? Log in',
                       style: const TextStyle(color: Colors.white70),
                       textAlign: TextAlign.center,
                     ),

@@ -18,6 +18,7 @@ class MessageBubble extends StatelessWidget {
     // print(isMe);
     return Row(
       mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         !isMe
             ? CircleAvatar(
