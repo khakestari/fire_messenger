@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../main.dart';
+// import '../widgets/custom_dropdown.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
@@ -19,7 +19,22 @@ class ChatScreen extends StatelessWidget {
           'FireMessenger',
         ),
         actions: [
-          DropdownButton(
+          IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
+          PopupMenuButton(
+            icon: const Icon(Icons.more_vert, color: Colors.black),
+            itemBuilder: (ctx) {
+              return Constants.choices.map((String choice) {
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: Text(choice),
+                );
+              }).toList();
+            },
+          ),
+          DropdownButtonHideUnderline(
+              child: DropdownButton(
+            alignment: AlignmentDirectional.topCenter,
+            elevation: 0,
             icon: const Icon(Icons.more_vert, color: Colors.black),
             items: const [
               DropdownMenuItem(
@@ -28,7 +43,10 @@ class ChatScreen extends StatelessWidget {
                   children: [
                     Icon(Icons.exit_to_app),
                     SizedBox(width: 8),
-                    Text('Log out')
+                    Text(
+                      'Log out',
+                      style: TextStyle(fontSize: 12),
+                    )
                   ],
                 ),
               )
@@ -38,7 +56,7 @@ class ChatScreen extends StatelessWidget {
                 FirebaseAuth.instance.signOut();
               }
             },
-          )
+          )),
         ],
       ),
       body: Container(
@@ -48,5 +66,26 @@ class ChatScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class Constants {
+  static const String FirstItem = 'Mute notification';
+  static const String SecondItem = 'View profile';
+  static const String ThirdItem = 'Log out';
+  static const List<String> choices = <String>[
+    FirstItem,
+    SecondItem,
+    ThirdItem,
+  ];
+}
+
+void choiceAction(String choice) {
+  if (choice == Constants.FirstItem) {
+    print('I First Item');
+  } else if (choice == Constants.SecondItem) {
+    print('I Second Item');
+  } else if (choice == Constants.ThirdItem) {
+    FirebaseAuth.instance.signOut();
   }
 }

@@ -37,7 +37,7 @@ class _NewMessageState extends State<NewMessage> {
     return Container(
       color: Theme.of(context).colorScheme.tertiary,
       margin: const EdgeInsets.only(top: 8),
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(2),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -60,7 +60,7 @@ class _NewMessageState extends State<NewMessage> {
             ),
           ),
           IconButton(
-              onPressed: _enteredMessage.trim().isEmpty ? null : null,
+              onPressed: () {},
               icon: Icon(
                 Icons.emoji_emotions_outlined,
                 color: Theme.of(context).colorScheme.primary,
@@ -68,7 +68,7 @@ class _NewMessageState extends State<NewMessage> {
           IconButton(
             onPressed: _enteredMessage.trim().isEmpty ? null : _sendMessage,
             icon: Icon(
-              Icons.send,
+              _enteredMessage.trim().isEmpty ? Icons.mic : Icons.send,
               color: Theme.of(context).colorScheme.primary,
             ),
           ),

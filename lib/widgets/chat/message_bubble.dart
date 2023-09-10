@@ -25,49 +25,46 @@ class MessageBubble extends StatelessWidget {
                 maxRadius: 16,
                 backgroundImage: NetworkImage(profileImage),
               )
-            : SizedBox(),
-        ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(30)),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-            child: Container(
-              width: 300,
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-              margin: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
-              decoration: isMe
-                  ? BoxDecoration(
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
-                        bottomLeft: Radius.circular(30),
-                      ),
-                      color:
-                          const Color(0xFFcccccc).withOpacity(0.5), //FF00449B
-                    )
-                  : BoxDecoration(
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
-                        bottomRight: Radius.circular(30),
-                      ),
-                      color: const Color(0xFFD70240).withOpacity(0.5),
+            : const SizedBox(),
+        Container(
+          width: 300,
+          padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 10),
+          margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+          decoration: isMe
+              ? BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(15),
+                    bottomLeft: Radius.circular(10),
+                  ),
+                  color: const Color(0xFF2E7690).withOpacity(0.5), //FF00449B
+                )
+              : BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(15),
+                    topRight: Radius.circular(10),
+                    bottomRight: Radius.circular(10),
+                  ),
+                  color: const Color(0xFF1A333D).withOpacity(0.5),
+                ),
+          child: Column(
+            crossAxisAlignment:
+                isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+            children: [
+              isMe
+                  ? SizedBox()
+                  : Text(
+                      username,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: isMe ? Color(0xFFFFFFFF) : Color(0xFF34A3E3)),
                     ),
-              child: Column(
-                crossAxisAlignment:
-                    isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    username,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    message,
-                    style: const TextStyle(color: Colors.white),
-                    textAlign: isMe ? TextAlign.end : TextAlign.start,
-                  ),
-                ],
+              Text(
+                message,
+                style: const TextStyle(color: Colors.white),
+                textAlign: isMe ? TextAlign.end : TextAlign.start,
               ),
-            ),
+            ],
           ),
         ),
         isMe
