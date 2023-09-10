@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 import '../widgets/pickers/user_image_picker.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +31,8 @@ class _AuthCardState extends State<AuthCard>
   };
 
   final _passwordController = TextEditingController();
+
+  File? _userImageFile;
 
   late AnimationController _controller;
   Animation<Offset>? _slideAnimation;
@@ -67,8 +70,15 @@ class _AuthCardState extends State<AuthCard>
 
   void _submit() {
     FocusScope.of(context).unfocus();
-    // print(_formKey.currentState);
-    // print(_formKey.currentState!.validate());
+    if (_userImageFile == null && _authMode == AuthMode.Signup) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('You didn\'t pick an image!'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
     if (!_formKey.currentState!.validate()) {
       // print('here is reading');
       // Invalid!
@@ -81,6 +91,10 @@ class _AuthCardState extends State<AuthCard>
       _authData['username']!.trim(),
       _authMode,
     );
+  }
+
+  void _submitImage(File? image) {
+    _userImageFile = image;
   }
 
   void _switchAuthMode() {
@@ -133,7 +147,8 @@ class _AuthCardState extends State<AuthCard>
                     child: FadeTransition(
                       opacity: _opacityAnimation!,
                       child: SlideTransition(
-                          position: _slideAnimation!, child: UserImagePicker()),
+                          position: _slideAnimation!,
+                          child: UserImagePicker(_submitImage)),
                     ),
                   ),
                   const SizedBox(height: 10),
