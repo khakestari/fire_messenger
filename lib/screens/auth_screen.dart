@@ -38,11 +38,17 @@ class _AuthScreenState extends State<AuthScreen> {
   //           ));
   // }
   bool _isLoading = false;
-  void _submitAuthForm(String email, String password, String username,
-      File profileImage, AuthMode mode) async {
+  void _submitAuthForm(
+    String email,
+    String password,
+    String username,
+    File profileImage,
+    AuthMode mode,
+  ) async {
     // print('$email $password');
 
     UserCredential authResult;
+    String profileImageUrl;
     try {
       setState(() {
         _isLoading = true;
@@ -57,18 +63,23 @@ class _AuthScreenState extends State<AuthScreen> {
           email: email,
           password: password,
         );
-
-        final ref = FirebaseStorage.instanceFor(app: app)
+        print(authResult.user!.uid);
+        Reference ref = FirebaseStorage.instance
             .ref()
             .child('profile_images')
-            .child(authResult.user!.uid + '.jpg');
-        ref.putFile(profileImage).whenComplete(() => null);
-        await FirebaseFirestore.instanceFor(app: app)
-            .collection('users')
-            .doc(authResult.user!.uid)
-            .set({
-          'username': username,
-          'email': email,
+            .child('${authResult.user!.uid}.jpg');
+        ref.putFile(profileImage).then((_) async {
+          profileImageUrl = await ref.getDownloadURL();
+          print(profileImageUrl);
+          print('belya');
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(authResult.user!.uid)
+              .set({
+            'username': username,
+            'email': email,
+            'profileImageUrl': profileImageUrl,
+          });
         });
       }
     } on PlatformException catch (e) {

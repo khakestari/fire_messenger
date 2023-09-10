@@ -9,13 +9,13 @@ class Messages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: Future(() => FirebaseAuth.instanceFor(app: app).currentUser!.uid),
+      future: Future(() => FirebaseAuth.instance.currentUser!.uid),
       builder: (ctx, futureSnapshot) {
         if (futureSnapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator.adaptive());
         }
         return StreamBuilder(
-          stream: FirebaseFirestore.instanceFor(app: app)
+          stream: FirebaseFirestore.instance
               .collection('chat')
               .orderBy('timeStamp', descending: true)
               .snapshots(),
