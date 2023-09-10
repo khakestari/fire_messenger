@@ -5,18 +5,26 @@ import 'package:flutter/material.dart';
 // import '../../../main.dart';
 
 class MessageBubble extends StatelessWidget {
-  MessageBubble(this.username, this.message, this.isMe, {required this.key});
+  MessageBubble(this.username, this.profileImage, this.message, this.isMe,
+      {required this.key});
   final String message;
   final bool isMe;
   final Key key;
   final String username;
+  final String profileImage;
 
   @override
   Widget build(BuildContext context) {
-    print(isMe);
+    // print(isMe);
     return Row(
       mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: [
+        !isMe
+            ? CircleAvatar(
+                maxRadius: 16,
+                backgroundImage: NetworkImage(profileImage),
+              )
+            : SizedBox(),
         ClipRRect(
           borderRadius: const BorderRadius.all(Radius.circular(30)),
           child: BackdropFilter(
@@ -24,7 +32,7 @@ class MessageBubble extends StatelessWidget {
             child: Container(
               width: 300,
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-              margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+              margin: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
               decoration: isMe
                   ? BoxDecoration(
                       borderRadius: const BorderRadius.only(
@@ -61,6 +69,12 @@ class MessageBubble extends StatelessWidget {
             ),
           ),
         ),
+        isMe
+            ? CircleAvatar(
+                maxRadius: 16,
+                backgroundImage: NetworkImage(profileImage),
+              )
+            : SizedBox(),
       ],
     );
   }
