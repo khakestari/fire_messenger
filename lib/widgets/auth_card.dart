@@ -11,6 +11,7 @@ class AuthCard extends StatefulWidget {
     String email,
     String password,
     String username,
+    File profileImage,
     AuthMode mode,
   ) submitFn;
   final _isLoading;
@@ -89,6 +90,7 @@ class _AuthCardState extends State<AuthCard>
       _authData['email']!.trim(),
       _authData['password']!.trim(),
       _authData['username']!.trim(),
+      _userImageFile!,
       _authMode,
     );
   }

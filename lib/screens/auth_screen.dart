@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import 'package:firebase_storage/firebase_storage.dart';
 import '../widgets/auth_card.dart';
 import '../main.dart';
 
@@ -36,8 +38,8 @@ class _AuthScreenState extends State<AuthScreen> {
   //           ));
   // }
   bool _isLoading = false;
-  void _submitAuthForm(
-      String email, String password, String username, AuthMode mode) async {
+  void _submitAuthForm(String email, String password, String username,
+      File profileImage, AuthMode mode) async {
     // print('$email $password');
 
     UserCredential authResult;
@@ -55,6 +57,12 @@ class _AuthScreenState extends State<AuthScreen> {
           email: email,
           password: password,
         );
+
+        final ref = FirebaseStorage.instanceFor(app: app)
+            .ref()
+            .child('profile_images')
+            .child(authResult.user!.uid + '.jpg');
+        ref.putFile(profileImage).whenComplete(() => null);
         await FirebaseFirestore.instanceFor(app: app)
             .collection('users')
             .doc(authResult.user!.uid)
