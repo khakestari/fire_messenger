@@ -67,8 +67,8 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   void initState() {
-    setupInteractedMessage();
     super.initState();
+    setupInteractedMessage();
   }
 
   @override

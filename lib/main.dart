@@ -1,4 +1,3 @@
-import 'package:fire_messenger/screens/chat_screen.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +6,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import './firebase_options.dart';
 // import './screens/chat_screen.dart';
 import 'screens/auth_screen.dart';
+import './screens/chat_screen.dart';
+import './screens/splash_screen.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
@@ -59,6 +60,9 @@ class MyApp extends StatelessWidget {
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (ctx, userSnapshot) {
+          if (userSnapshot.connectionState == ConnectionState.waiting) {
+            return SplashScreen();
+          }
           if (userSnapshot.hasData) {
             return ChatScreen();
           }

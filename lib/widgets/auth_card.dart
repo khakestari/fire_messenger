@@ -162,6 +162,9 @@ class _AuthCardState extends State<AuthCard>
                       suffixIcon: Icon(Icons.email),
                     ),
                     keyboardType: TextInputType.emailAddress,
+                    autocorrect: false,
+                    textCapitalization: TextCapitalization.none,
+                    enableSuggestions: false,
                     validator: (value) {
                       if (value!.isEmpty ||
                           !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
@@ -192,10 +195,12 @@ class _AuthCardState extends State<AuthCard>
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(40))),
                             labelText: 'Username',
+
                             // filled: true,
                             fillColor: Color(0x00C6B8B8),
                             suffixIcon: Icon(Icons.account_circle),
                           ),
+                          enableSuggestions: false,
                           validator: _authMode == AuthMode.Signup
                               ? (value) {
                                   if (value!.isEmpty || value.length < 4) {
