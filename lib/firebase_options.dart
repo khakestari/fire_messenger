@@ -10,9 +10,9 @@ import 'package:flutter/foundation.dart'
 /// ```dart
 /// import 'firebase_options.dart';
 /// // ...
-// / await Firebase.initializeApp(
-// /   options: DefaultFirebaseOptions.currentPlatform,
-// / );
+/// await Firebase.initializeApp(
+///   options: DefaultFirebaseOptions.currentPlatform,
+/// );
 /// ```
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
@@ -67,8 +67,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '16916994820',
     projectId: 'fire-messenger-b02a1',
     storageBucket: 'fire-messenger-b02a1.appspot.com',
-    iosClientId:
-        '16916994820-37d5bbuehpniisf2u6357r3l7mn2i5b9.apps.googleusercontent.com',
+    iosClientId: '16916994820-37d5bbuehpniisf2u6357r3l7mn2i5b9.apps.googleusercontent.com',
     iosBundleId: 'com.example.fireMessenger',
   );
 
@@ -78,8 +77,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '16916994820',
     projectId: 'fire-messenger-b02a1',
     storageBucket: 'fire-messenger-b02a1.appspot.com',
-    iosClientId:
-        '16916994820-0mbkuf1ctbo53485ho1vh26p6dn1e4gp.apps.googleusercontent.com',
+    iosClientId: '16916994820-0mbkuf1ctbo53485ho1vh26p6dn1e4gp.apps.googleusercontent.com',
     iosBundleId: 'com.example.fireMessenger.RunnerTests',
   );
 }

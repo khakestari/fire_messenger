@@ -1,19 +1,29 @@
 import 'package:fire_messenger/screens/chat_screen.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
-import 'package:firebase_core/firebase_core.dart' as f;
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import './firebase_options.dart';
 // import './screens/chat_screen.dart';
 import 'screens/auth_screen.dart';
 
-late final f.FirebaseApp app;
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  await Firebase.initializeApp();
+  print(message);
+  print("Handling a background message: ${message.messageId}");
+}
+
+late final FirebaseApp app;
 late final FirebaseAuth auth;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  app = await f.Firebase.initializeApp(
+  app = await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform);
   auth = FirebaseAuth.instanceFor(app: app);
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   runApp(const MyApp());
 }
 
