@@ -1,16 +1,26 @@
-# fire_messenger
+# Fire Messenger
+A real-time chat application built with Flutter, Firebase Authentication, Cloud Firestore, and Firebase Storage. This app allows users to securely log in, send messages in a chat environment.
 
-A new Flutter project.
+## Features
+- **Authentication**: Secure user authentication using Firebase Authentication.
+- **Real-Time Messaging**: Send and receive messages in real-time with Firestore.
+- **Push Notifications**: Receive push notifications for new messages using Firebase messaging and Functions.
+- **Responsive Design**: Built with Flutter for a consistent user experience on both Android and iOS.
 
-## Getting Started
+## Screenshots
+soon will be added.
 
-This project is a starting point for a Flutter application.
+## Usage
+- Launch the app on your device or emulator.
+- Sign up for a new account or log in if you already have one.
+- Send messages in the chat.
+- Receive push notifications for new messages even when the app is in the background.
 
-A few resources to get you started if this is your first Flutter project:
+## Contributing
+Contributions are welcome! Here are some ways you can contribute to this project:
+- Report bugs and suggest improvements by opening issues.
+- Implement new features or enhance existing ones and submit pull requests.
+- Provide feedback on the app's usability and design.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Credits
+This project was inspired by the [Flutter & Dart - The Complete Guide course by Maximilian Schwarzmüller on Udemy](https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/?kw=flutter&src=sac).
